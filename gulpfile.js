@@ -1,23 +1,27 @@
-var gulp = require('gulp');  //gulpプラグインの読み込み
-var sass = require('gulp-sass'); //sass to css
-var autoprefixer = require('gulp-autoprefixer'); // Auto Vender pri (-webkit-..
-var sourcemaps = require('gulp-sourcemaps');// errorわかりやすく
+"use strict";
 
-gulp.task('sass', function () {
-  return gulp.src('./origin/blog.scss')
-    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))//返還後のstyle,error
-    .pipe(autoprefixer({  //autoprefixerの実行
-      browsers: ["last 2 versions"],
-      cascade: false
-    }))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./origin/'));
+// プラグインの読み込み
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+// 掃き出し階層の指定を定義
+const path = {
+  src: './assets/sass/**/*.sass',
+  dist: './assets/css/'
+}
+
+gulp.task("sass", function (done) {
+  gulp
+    .src(path.src)
+    .pipe(sass({ outputStyle: "compressed" }))
+    .pipe(gulp.dest(path.dist));
+  done();
 });
 
-gulp.task('watch',function() {
-  gulp.watch("./origin/*.scss", ["sass"]); // 第2は require時のobj変数名
-})
+//動作設定
+gulp.task("default", gulp.series('sass', function(done){
+    gulp.watch(path.src, gulp.series('sass'));
+    done();
+}));
 
-// タスク"task-watch"がgulpと入力しただけでdefaultで実行されるようになる
-gulp.task('default', ['watch']);
-
+// Usage
+// > npx gulp
