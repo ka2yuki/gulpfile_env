@@ -1,4 +1,5 @@
 "use strict";
+// npm i -D gulp gulp-sass
 
 // プラグインの読み込み
 const gulp = require('gulp');
