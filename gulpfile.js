@@ -24,5 +24,5 @@ gulp.task("default", gulp.series('sass', function(done){
     done();
 }));
 
-// Usage
-// > npx gulp
+// Type
+// > gulp
