@@ -10,6 +10,7 @@ const path = {
   dist: './assets/css/'
 }
 
+// expanded: いつもの. compressed: 圧縮. nested: 閉じダグのみ}改行なし. compact: class内のみ改行しない.
 gulp.task("sass", function (done) {
   gulp
     .src(path.src)
