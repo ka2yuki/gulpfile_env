@@ -1,5 +1,6 @@
-# Gulpfile.js
-My gulpfile.js Ver: small,quick.
+# 👍🏻
+- 自動でコメントを削除してくれる。
 
-# Offical
-[https://gulpjs.com/](https://gulpjs.com/)
+# 📖
+- [gulpjs.com](https://gulpjs.com/)
+- 
