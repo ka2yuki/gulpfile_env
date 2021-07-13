@@ -3,6 +3,10 @@
 *   BACE
 * ========
 */
+@mixin google-font($family) {
+  @import url('http://fonts.googleapis.com/css?family=#{$family}');
+}
+@include google-font('Droid Sans');
 
 * {
   box-sizing: border-box;
