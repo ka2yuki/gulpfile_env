@@ -23,6 +23,12 @@ a {
   text-decoration: none;
   color: #001e43;
 }
+.pc-only {
+  display: block;
+}
+.sp-only {
+  display: none;
+}
 
 #wrapper {
 }

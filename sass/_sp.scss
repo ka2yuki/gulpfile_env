@@ -4,6 +4,13 @@
 * ===========
 */
 @media (max-width: 640px) {
+  .pc-only {
+    display: none;
+  }
+  .sp-only {
+    display: block;
+  }
+
   #wrapper {
     ul {
       li {
