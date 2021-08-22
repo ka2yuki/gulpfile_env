@@ -1,9 +1,9 @@
 ('use strict');
-
-// gulpプラグインの読み込み
-const gulp = require('gulp');
-// Sassをコンパイルするプラグインの読み込み
-const sass = require('gulp-sass');
+const gulp = require('gulp'); // gulp本体
+const sass = require('gulp-sass'); // Sassをコンパイルする
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer'); // vender prefix を 付与.
+const sourcemaps = require('gulp-sourcemaps'); // scssの箇所をmapさせる.
 
 // 掃き出し階層の指定を定義
 const path = {
@@ -20,7 +20,19 @@ const opts = {
 gulp.task('sass', function (done) {
   gulp
     .src(path.src)
-    .pipe(sass({ outputStyle: opts.expanded }))
+    .pipe(sourcemaps.init())
+    .pipe(
+      postcss([
+        // glugins
+        autoprefixer({
+          // その他は最新2バージョンで必要なベンダープレフィックスを付与する設定
+          browsers: ['last 2 versions', 'ie >= 11', 'Android >= 4'], // ☆IEは11以上、Androidは4.4以上
+          cascade: false,
+        }),
+      ])
+    )
+    .pipe(sass({ outputStyle: opts.expanded })) // expanded: いつもの. compressed: 圧縮. nested: 閉じダグのみ}改行なし. compact: class内のみ改行しない.
+    .pipe(sourcemaps.write('.')) // current出力. 記載なしは、ファイル出力はしないがmapはされる。
     .pipe(gulp.dest(path.dist));
   done();
 });
